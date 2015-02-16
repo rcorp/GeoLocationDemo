@@ -36,7 +36,7 @@ io.sockets.on('connection', function(socket) {
      * @return {[type]}      [description]
      */
     socket.on('disconnect', function() {
-        console.log(onLineBySocket, 'onLineBySocket')
+        console.log(onLineBySocket, 'disconnect onLineBySocket')
     })
 
 
@@ -46,8 +46,7 @@ io.sockets.on('connection', function(socket) {
      * Send Public Message or broadcast(to all except the sender itself)
      */
     socket.on('sendLocationToAdmin', function(data) {
-        console.log(data)
-        socket.broadcast.emit('locationFromUser',data)
+        socket.broadcast.emit('addLocationToGrid',data)
     });
 
 });
