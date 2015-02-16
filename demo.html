@@ -13,7 +13,12 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <title>Google Maps API v3 Geocoder Tool</title>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="js/socket.io.js" ></script>
+<script src="client.js" ></script>
+
 <script type="text/javascript">
+
+
 
 var MAPFILES_URL = "http://maps.gstatic.com/intl/en_us/mapfiles/";
 
@@ -371,6 +376,10 @@ function plotMatchesOnMap(results, reverse) {
         document.getElementById('p' + resultNum).offsetTop -
         document.getElementById('matches').offsetTop;
       selected = resultNum;
+      // setTimeout(function() {
+        sendLocationToAdmin(result)
+      // }, 1000)
+
     }
   }
 
@@ -390,7 +399,6 @@ function plotMatchesOnMap(results, reverse) {
     });
 
     google.maps.event.addListener(markers[i], 'click', openInfoWindow(i, results[i], markers[i]));
-console.log(results[i])
     resultsListHtml += getResultsListItem(i, getResultDescription(results[i]));
   }
 
@@ -700,7 +708,13 @@ span.pc_localities {
 </head>
 
 <body onload="init()">
-<h1>Google Maps API v3 Geocoder Tool</h1>
+<h1>Locovida Washroom App</h1>
+<div id="mapcontainer">
+  <div id="map"></div>
+  <div id="boundsLegend">Bounds</div>
+  <div id="viewportLegend">Viewport</div>
+</div>
+<div id="matches"></div>
 <div id="inputForm">
   <div id="instructions">Enter a query to forward geocode, or click on the map to reverse geocode.</div>
   <div>
@@ -729,11 +743,5 @@ span.pc_localities {
     <span id="matchCount"></span>
   </div>
 </div>
-<div id="mapcontainer">
-  <div id="map"></div>
-  <div id="boundsLegend">Bounds</div>
-  <div id="viewportLegend">Viewport</div>
-</div>
-<div id="matches"></div>
 </body>
 </html>
