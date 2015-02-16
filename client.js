@@ -39,9 +39,11 @@ socket.on('connect', function() {
  * Event triggered when socket gets connected successfully
  */
 socket.on('addLocationToGrid', function(obj) {
-    console.log("addLocationToGrid", obj.data["formatted_address"])
+    console.log("addLocationToGrid", obj.data, obj.data["formatted_address"])
     grid.store.add({
-        "formatted_address":obj.data["formatted_address"]
+        "formatted_address":obj.data["formatted_address"],
+        "latitude": obj.data["geometry"]["location"]["k"],
+        "longitude": obj.data["geometry"]["location"]["D"]
     })
 });
 

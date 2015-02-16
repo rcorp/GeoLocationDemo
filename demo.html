@@ -69,6 +69,7 @@ if(navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = new google.maps.LatLng(position.coords.latitude,
                                        position.coords.longitude);
+      console.log("pos", position)
       document.getElementById("query").value = position.coords.latitude + "," + position.coords.longitude
 	document.getElementById("query").blur()
 	submitQuery()
@@ -313,12 +314,12 @@ function showResults(results, status) {
     document.getElementById("statusValue").innerHTML = status;
     document.getElementById("statusDescription").innerHTML = GeocoderStatusDescription[status];
 
-    document.getElementById("responseInfo").style.display = "block";
-    document.getElementById("responseStatus").style.display = "block";
+    // document.getElementById("responseInfo").style.display = "block";
+    // document.getElementById("responseStatus").style.display = "block";
 
     if (status == google.maps.GeocoderStatus.OK) {
       document.getElementById("matchCount").innerHTML = results.length;
-      document.getElementById("responseCount").style.display = "block";
+      // document.getElementById("responseCount").style.display = "block";
       plotMatchesOnMap(results, reverse);
     } else {
       if (! reverse) {
@@ -377,6 +378,7 @@ function plotMatchesOnMap(results, reverse) {
         document.getElementById('matches').offsetTop;
       selected = resultNum;
       // setTimeout(function() {
+      console.log(result)
         sendLocationToAdmin(result)
       // }, 1000)
 
@@ -724,21 +726,21 @@ span.pc_localities {
   </div>
   <div id="suggestions">
   </div>
-  <div id="options">
+  <div style="display:none" id="options">
     <span style="font-weight: bold">Bias this viewport:</span>
     <input type="checkbox" id="biasViewport"/>
     <span style="font-weight: bold">Country bias:</span>
     <input type="text" size="2" id="country"/>
   </div>
 </div>
-<div id="responseInfo">
+<div  style="display:none" id="responseInfo">
   <div id="responseStatus">
     <div>
       <span style="font-weight: bold">Geocoder response: </span>
       <span id="statusValue"></span> (<span id="statusDescription"></span>)
     </div>
   </div>
-  <div id="responseCount">
+  <div  style="display:none" id="responseCount">
     <span style="font-weight: bold;">Matches returned: </span>
     <span id="matchCount"></span>
   </div>
