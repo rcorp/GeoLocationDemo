@@ -1,0 +1,47 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+    <title> ASPIRE</title>
+
+    <link rel="stylesheet" href="lib/dijit/themes/dijit.css" />
+    <link rel="stylesheet" href="lib/dijit/themes/claro/claro.css" />
+    <link rel="stylesheet" type="text/css" href="lib/dgrid/css/skins/claro.css" />
+    <script type="text/javascript" src="js/socket.io.js"></script>
+    <script data-dojo-config="async: 1, isDebug: 0" src="lib/dojo/dojo.js"></script>
+<script src="client.js" ></script>
+    
+    <!--<script data-dojo-config="async: 1, isDebug: 0" src="js/lib/build/aspire/aspire.js.uncompressed.js"></script>-->
+</head>
+<body class="claro">
+
+    <div id="standByPane"> </div>
+    <div id="appPane"> </div>
+    <script>
+        require ([
+                'dojo/_base/declare',
+                "dgrid/OnDemandGrid",
+                "dgrid/Selection",
+                "dgrid/Keyboard",
+                'dojo/store/Memory',
+                'dojo/store/Observable'
+            ],function (declare, Grid, Selection, Keyboard, Memory, Observable){
+                var StandardGrid = declare([Grid, Selection, Keyboard]);
+                var grid = window.grid = new StandardGrid({
+                    sort: "id",
+                    store: new Observable(new Memory({
+                        data:[],
+                        idProperty:"formatted_address"
+                    })),
+                    columns: {
+                        formatted_address: "Place"
+                    },
+                    sort: "col3", // initially sort by col3 ascending
+                    noDataMessage: "Nobody here but us chickens!",
+                    loadingMessage: "Loading..."
+                }, "grid");
+        })
+    </script>
+        <div id="grid"></div>
+</body>
+</html>
