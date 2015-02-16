@@ -35,6 +35,15 @@ socket.on('connect', function() {
     console.log('Connected')
 });
 
+/**
+ * Event triggered when socket gets connected successfully
+ */
+socket.on('addLocationToGrid', function(obj) {
+    console.log("addLocationToGrid", obj.data["formatted_address"])
+    grid.store.add({
+        "formatted_address":obj.data["formatted_address"]
+    })
+});
 
 /**
  * Send Public Message or broadcast(to all except me)
