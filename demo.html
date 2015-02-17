@@ -380,8 +380,7 @@ function plotMatchesOnMap(results, reverse) {
         document.getElementById('p' + resultNum).offsetTop -
         document.getElementById('matches').offsetTop;
       selected = resultNum;
-        // sendLocationToAdmin(result)
-
+      window.resDes = result
     }
   }
 
@@ -427,7 +426,11 @@ function plotMatchesOnMap(results, reverse) {
 }
 
 function selectMarker(n) {
-  alert('ads')
+  google.maps.event.trigger(markers[n], 'click');
+}
+
+function XselectMarker(n) {
+  sendLocationToAdmin(window.resDes)
   google.maps.event.trigger(markers[n], 'click');
 }
 
@@ -446,7 +449,7 @@ function getMarkerImageUrl(resultNum) {
 }
 
 function getResultsListItem(resultNum, resultDescription) {
-  var html  = '<a onclick="selectMarker(' + resultNum + ')">';
+  var html  = '<a onclick="XselectMarker(' + resultNum + ')">';
       html += '<div class="info" id="p' + resultNum + '">';
       html += '<table><tr valign="top">';
       html += '<td style="padding: 2px"><img src="'
