@@ -11,10 +11,12 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, user-scalable=no">
 <title>Google Maps API v3 Geocoder Tool</title>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script src="js/socket.io.js" ></script>
 <script src="client.js" ></script>
+<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 
 <script type="text/javascript">
 
@@ -486,11 +488,11 @@ function getResultDescription(result) {
   if (result.postcode_localities) {
       html += tr('Localities', result.postcode_localities.join('<br/>'));
   }
-      html += tr('Types', result.types.join(", "));
+      html += tr('Types', result.types.join(", ").split('_').join (' '));
       html += tr('Location', result.geometry.location.toString());
-      html += tr('Bounds', (bounds ? boundsToHtml(bounds) : "None"));
-      html += tr('Viewport', boundsToHtml(result.geometry.viewport));
-      html += tr('Location type', result.geometry.location_type);
+      //html += tr('Bounds', (bounds ? boundsToHtml(bounds) : "None"));
+      //html += tr('Viewport', boundsToHtml(result.geometry.viewport));
+      //html += tr('Location type', result.geometry.location_type);
       if (result.partial_match) {
         html += tr('Partial match', 'Yes');
       }
@@ -550,19 +552,32 @@ function boundsToHtml(bounds) {
 </script>
 
 <style>
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Lato, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background-color: white;
+  width: 100%;
+  height: 80px;
+}
 #mapcontainer {
   position: relative;
-  width: 640px;
-  height: 480px;
-  margin: 10px;
-  float: left;
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-flow: column;
 }
 
 #map {
   width: 100%;
   height: 100%;
-  border: 1px solid black;
-  position: absolute;
+  flex-grow: 1;
 }
 
 #boundsLegend,#viewportLegend {
@@ -628,21 +643,10 @@ function boundsToHtml(bounds) {
 }
 
 #matches {
-  margin-top: 10px;
-  width: 320px;
-  height: 490px;
-  float: left;
-  border: 1px solid #666666;
+  width: 100%;
+  height: 200px;
   display: none;
   overflow: auto;
-}
-
-h1 {
-  border-bottom: 1px solid #999999;
-  font-family: sans-serif;
-  padding-bottom: 12px;
-  width: 650px;
-  margin-bottom: 0px;
 }
 
 #inputForm {
@@ -667,11 +671,16 @@ h1 {
   text-align: right;
   font-weight: bold;
   vertical-align: top;
-  white-space: nowrap
+  white-space: nowrap;
+  color: #cc056d;
+  font-size: 20px;
 }
 
 .value {
   vertical-align: top;
+  vertical-align: middle;
+  font-size: 17px;
+  font-family: "Lato";
 }
 
 #options {
@@ -710,7 +719,10 @@ span.pc_localities {
 </head>
 
 <body onload="init()">
-<h1>Locovida Washroom App</h1>
+<header>
+<img src="logo.png" style="float:left;" />
+<img src="search.png" style="float:right;" />
+</header>
 <div id="mapcontainer">
   <div id="map"></div>
   <div id="boundsLegend">Bounds</div>
