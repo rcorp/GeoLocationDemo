@@ -17,7 +17,10 @@ socket.on('addLocationToGrid', function(obj) {
     grid.store.add({
         "formatted_address": obj.data["formatted_address"],
         "latitude": obj.data["geometry"]["location"]["k"],
-        "longitude": obj.data["geometry"]["location"]["D"]
+        "longitude": obj.data["geometry"]["location"]["D"],
+        "userid":obj.data.userid,
+        "add1":obj.data.add1,
+        "add2":obj.data.add2
     })
 });
 

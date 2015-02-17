@@ -430,6 +430,14 @@ function selectMarker(n) {
 }
 
 function XselectMarker(n) {
+  var userid = document.getElementById("userid").value
+  var add1 = document.getElementById("address1").value
+  var add2 = document.getElementById("address2").value
+
+  window.resDes["userid"] = userid
+  window.resDes["add1"] = add1
+  window.resDes["add2"] = add2
+
   sendLocationToAdmin(window.resDes)
   google.maps.event.trigger(markers[n], 'click');
 }
