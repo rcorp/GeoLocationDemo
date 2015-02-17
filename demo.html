@@ -653,7 +653,6 @@ header {
 
 #inputForm {
   width: 100%;
-  margin: 10px;
 }
 
 #footer {
@@ -661,7 +660,7 @@ header {
   font-family: sans-serif;
   font-size: 8pt;
   clear: both;
-  width: 650px;
+  width: 100%;
   border-top: 1px solid #999999;
 }
 
@@ -732,6 +731,21 @@ span.pc_localities {
 </div>
 <div id="matches"></div>
 <div id="inputForm">
+  <div>
+    <span style="font-weight: bold">UserID:</span>
+    <input type="text" size="60" id="userid"/>
+  </div>
+
+  <div>
+    <span style="font-weight: bold">Address 1:</span>
+    <input type="text" size="60" id="address1"/>
+  </div>
+
+  <div>
+    <span style="font-weight: bold">Address 2:</span>
+    <input type="text" size="60" id="address2"/>
+  </div>
+
   <div id="instructions">Enter a query to forward geocode, or click on the map to reverse geocode.</div>
   <div>
     <span style="font-weight: bold">Query:</span>
