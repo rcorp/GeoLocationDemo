@@ -14,15 +14,11 @@ window.count = 0;
  */
 socket.on('addLocationToGrid', function(obj) {
     console.log("addLocationToGrid", obj.data, obj.data["formatted_address"])
-    if (window.count > 1) {
-        grid.store.add({
-            "formatted_address": obj.data["formatted_address"],
-            "latitude": obj.data["geometry"]["location"]["k"],
-            "longitude": obj.data["geometry"]["location"]["D"]
-        })
-    } else {
-        window.count++;
-    }
+    grid.store.add({
+        "formatted_address": obj.data["formatted_address"],
+        "latitude": obj.data["geometry"]["location"]["k"],
+        "longitude": obj.data["geometry"]["location"]["D"]
+    })
 });
 
 /**
